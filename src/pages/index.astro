@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.tsx";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout>
+  <Header />
+  <main class="min-h-screen">
+    <Hero client:load />
+  </main>
+  <Footer />
+</BaseLayout>

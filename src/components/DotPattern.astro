@@ -1,0 +1,20 @@
+---
+interface Props {
+  width?: number;
+  height?: number;
+  cr?: number;
+  className?: string;
+}
+
+const { width = 16, height = 16, cr = 1, className = "" } = Astro.props;
+
+import { cn } from "../lib/utils";
+
+const classes = cn("pointer-events-none absolute inset-0 h-full w-full", className);
+---
+
+<div
+  aria-hidden="true"
+  class={classes}
+  style={`background-image: radial-gradient(circle, currentColor ${cr}px, transparent ${cr}px); background-size: ${width}px ${height}px;`}
+/>

@@ -1,0 +1,28 @@
+---
+import { typograf } from "../lib/typograf";
+
+const fullLine = typograf("ИП Дума Евгений Максимович • ОГРНИП 320703100031915 • ИНН 701770650489");
+const nameLine = typograf("ИП Дума Евгений Максимович");
+const privacyText = typograf("Политика конфиденциальности");
+---
+
+<footer class="w-full py-6 px-4 md:px-8">
+  <div class="max-w-7xl mx-auto text-center space-y-3">
+    <!-- Десктоп/планшет: одна строка с буллитами -->
+    <p class="hidden sm:block text-sm text-muted-foreground/60" set:html={fullLine} />
+
+    <!-- Мобильные: три строки -->
+    <div class="sm:hidden text-sm text-muted-foreground/60 space-y-1">
+      <p set:html={nameLine} />
+      <p>ОГРНИП 320703100031915</p>
+      <p>ИНН 701770650489</p>
+    </div>
+
+    <!-- Ссылка на политику конфиденциальности -->
+    <a
+      href="/privacy"
+      class="inline-block text-sm text-muted-foreground/60 hover:text-muted-foreground transition-colors"
+      set:html={privacyText}
+    />
+  </div>
+</footer>

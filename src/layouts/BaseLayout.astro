@@ -1,0 +1,107 @@
+---
+import "../styles/globals.css";
+import DotPattern from "../components/DotPattern.astro";
+import TelegramBanner from "../components/TelegramBanner.tsx";
+import YandexMetrika from "../components/YandexMetrika.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const SITE_URL = "https://exportautorus.ru";
+
+const {
+  title = "Korea Motors - Автомобили из Южной Кореи под ключ",
+  description = "Импорт авто из Кореи под ключ. Авто до 160 л.с. без переплаты за утильсбор. Комиссия от 35 000 ₽. Genesis, Hyundai, Kia. Доставка по России.",
+  noindex = false,
+} = Astro.props;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Korea Motors",
+  description: "Импорт авто из Кореи под ключ. Авто до 160 л.с. без переплаты за утильсбор.",
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo.jpg`,
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "sales",
+    areaServed: "RU",
+    availableLanguage: "Russian",
+  },
+  sameAs: [],
+};
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="автомобили из Кореи, импорт авто, Korea Motors, купить авто из Кореи, Genesis, Hyundai, Kia, автомобили под ключ, утильсбор, авто без утильсбора, импорт авто 2025" />
+
+    {noindex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <meta name="robots" content="index, follow" />
+    )}
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:url" content={SITE_URL} />
+    <meta property="og:site_name" content="Korea Motors" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content="Импорт авто из Кореи под ключ. Авто до 160 л.с. без переплаты за утильсбор. Комиссия от 35 000 ₽." />
+    <meta property="og:image" content={`${SITE_URL}/og-image.jpg`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Korea Motors - Импорт автомобилей из Южной Кореи" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content="Импорт авто из Кореи. Авто до 160 л.с. без переплаты за утильсбор. Комиссия от 35 000 ₽." />
+    <meta name="twitter:image" content={`${SITE_URL}/og-image.jpg`} />
+
+    <!-- Yandex verification -->
+    <meta name="yandex-verification" content="002c5dbdefc798e0" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Unbounded:wght@600;700&display=swap&subset=cyrillic" rel="stylesheet" />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- TGTrack -->
+    <script
+      src="https://api.tgtrack.ru/API/landing_script/v1/?linkID=1c1cf1da0db979&chat=exportautorus&type=ya&counterID=105692307"
+      type="text/javascript"
+      defer
+    ></script>
+  </head>
+  <body class="font-sans antialiased bg-background">
+    <!-- Global dot pattern background -->
+    <DotPattern className="fixed inset-0 z-0 text-neutral-400/30" />
+
+    <!-- Site content -->
+    <div class="relative z-10">
+      <TelegramBanner client:load />
+      <slot />
+    </div>
+
+    <YandexMetrika />
+  </body>
+</html>
