@@ -36,8 +36,6 @@ public/         # статика (иконки, изображения)
 
 ## Деплой
 
-```bash
-npm run build    # создаёт папку dist/
-```
+GitHub Pages + GitHub Actions (workflow в `.github/workflows/deploy.yml`).
 
-Загрузить содержимое `dist/` на хостинг как статический сайт.
+Push в `main` → автосборка → деплой на [exportautorus.ru](https://exportautorus.ru).
